@@ -1,0 +1,34 @@
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = true
+[color "diff"]
+  commit = yellow
+  frag = cyan
+  meta = yellow
+  new = green
+  old = red
+  plain = black
+  whitespace = red reverse
+[help]
+  autocorrect = 1
+[branch]
+  autosetuprebase = always
+[push]
+  default = current
+[core]
+  excludesfile = ~/.gitignore
+[color "diff-highlight"]
+  newHighlight = green reverse
+  newNormal = green
+  oldHighlight = red reverse
+  oldNormal = red
+[alias]
+	branches = !legit branches
+	publish = !legit publish
+	unpublish = !legit unpublish
+	sync = !legit sync
+	switch = !legit switch
+	resync = !legit resync
+	undo = !legit undo

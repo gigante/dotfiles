@@ -1,0 +1,34 @@
+#setxkbmap -model abnt2 -layout br -variant abnt2 # set keyboard layout
+
+# editor
+export EDITOR='nano'
+export VISUAL='nano'
+export PAGER='less'
+
+# gpg key
+export GPGKEY=XY
+
+# lang
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+# bin
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.npm/bin:$PATH"
+
+# funcoeszz
+export ZZPATH="$HOME/bin/funcoeszz"
+source $HOME/.zzzshrc

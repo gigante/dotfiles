@@ -1,0 +1,54 @@
+# i3blocks config file
+# List of valid properties:
+# align, color, command, full_text, instance, interval, label, min_width
+# name, separator, separator_block_width, short_text, signal, urgent
+
+# Global properties
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=10
+markup=none
+
+[mediaplayer]
+label=
+interval=5
+signal=10
+
+[memory]
+label=
+command=~/bin/blocklets/memory
+markup=pango
+interval=30
+
+[cpu_usage]
+label=
+command=~/bin/blocklets/cpu_usage
+markup=pango
+interval=10
+
+[disk]
+label=
+command=~/bin/blocklets/disk
+markup=pango
+interval=30
+
+[bandwidth]
+command=~/bin/blocklets/bandwidth -i  -o 
+interval=2
+color=#799F26
+
+[volume]
+command=~/bin/blocklets/volume
+label=
+instance=Master
+interval=once
+signal=10
+
+[battery]
+command=~/bin/blocklets/battery
+markup=pango
+interval=30
+
+[time]
+label=
+command=date '+%d/%m %H:%M'
+interval=1

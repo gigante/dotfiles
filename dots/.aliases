@@ -1,0 +1,15 @@
+alias ll="ls -FGlahs"
+alias upsa='eval "$(ssh-agent -s)"'
+alias grep="grep --color=auto"
+alias cat='bat'
+alias compose="docker-compose"
+alias manage='python manage.py' # django
+
+alias zreload='source $HOME/.zshrc'
+alias ed-zsh='$EDITOR $HOME/.zshrc'
+alias ed-hosts='sudo $EDITOR /etc/hosts'
+alias ed-i3='$EDITOR $HOME/.config/i3/config'
+alias ed-i3blocks='$EDITOR $HOME/.config/i3blocks/config'
+alias ed-aliases='$EDITOR $HOME/.aliases'
+alias ed-exports='$EDITOR $HOME/.exports'
+alias ed-functions='$EDITOR $HOME/.functions'
