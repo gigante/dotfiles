@@ -38,7 +38,7 @@ color=#799F26
 
 [volume]
 command=~/bin/blocklets/volume
-label=
+label=
 instance=Master
 interval=once
 signal=10

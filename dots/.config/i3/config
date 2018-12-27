@@ -179,6 +179,7 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+n exec playerctl next
 bindsym $mod+p exec playerctl previous
+bindsym $mod+m exec playerctl play-pause
 
 # Quit System
 #bindsym Control+$mod+l exec ~/bin/blocklets/shutdown_menu

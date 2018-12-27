@@ -1,6 +1,8 @@
 md() { mkdir -p "$1" && cd "$1"; }
 screen() { echo "$1"; }
 
+x() { sh "$HOME/.screenlayout/$1.sh"; }
+
 # systemd
 if which systemctl &>/dev/null; then
   start() { sudo systemctl start $1.service }

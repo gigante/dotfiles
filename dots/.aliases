@@ -4,6 +4,10 @@ alias grep="grep --color=auto"
 alias cat='bat'
 alias compose="docker-compose"
 alias manage='python manage.py' # django
+alias kb='setxkbmap -model abnt2 -layout br -variant abnt2'
+alias mount="udiskie-mount"
+alias umount="udiskie-umount"
+alias px='trizen'
 
 alias zreload='source $HOME/.zshrc'
 alias ed-zsh='$EDITOR $HOME/.zshrc'
