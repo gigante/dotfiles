@@ -149,14 +149,15 @@ bar {
 }
 
 # AUTOSTART
-#exec_always --no-startup-id feh --bg-fill $HOME/.config/wallpapers/arch.png
+exec_always --no-startup-id feh --bg-fill ~/Dropbox/arch.png
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet &
-exec --no-startup-id redshift-gtk &
-exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
+#exec --no-startup-id redshift-gtk &
+#exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id albert &
 exec --no-startup-id dropbox &
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2 &
+exec --no-startup-id blueman-applet &
 
 # Pulse Audio controls
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
