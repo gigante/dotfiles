@@ -1,5 +1,7 @@
 [global_config]
+  broadcast_default = off
   enabled_plugins = ,
+  inactive_color_offset = 0.505921052632
   scroll_tabbar = True
   tab_position = bottom
   title_font = Monaco 9
