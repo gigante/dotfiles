@@ -1,24 +1,11 @@
 # vscode
-dots/.config/Code/CachedData
-dots/.config/Code/Cache
-dots/.config/Code/logs
-dots/.config/Code/User/workspaceStorage
-dots/.config/Code/Backups
-dots/.config/Code/GPUCache
-dots/.config/Code/Cookies
-dots/.config/Code/Cookies-journal
-dots/.config/Code/Network Persistent State
-dots/.config/Code/machineid
-dots/.config/Code/languagepacks.json
-dots/.config/Code/storage.json
-dots/.config/Code/CachedExtensions
-dots/.config/Code/User/globalStorage
+dots/.config/Code/*
+!dots/.config/Code/User/settings.json
 
 # fonts
 dots/.fonts/.uuid
 
 # bin
-bin/bin/composer
-bin/bin/lein
-bin/bin/ngrok
-bin/bin/sak
+bin/bin/*
+!bin/bin/funcoeszz
+!bin/bin/blocklets
