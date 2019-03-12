@@ -1,14 +1,13 @@
 # i3 config file (v4)
 set $mod Mod4
-font pango:SNFS Display, FontAwesome 10
-
+font pango:Ubuntu, FontAwesome 12
 floating_modifier $mod
 
 ## START GAPS CONFIG
 for_window [class="^.*"] border pixel 0
 smart_gaps on
 smart_borders on
-gaps inner 6
+gaps inner 4
 gaps outer 0
 ## END GAPGS CONFIG
 
@@ -152,8 +151,6 @@ bar {
 exec_always --no-startup-id feh --bg-fill ~/Dropbox/arch.png
 exec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id nm-applet &
-#exec --no-startup-id redshift-gtk &
-#exec --no-startup-id /usr/lib/geoclue-2.0/demos/agent
 exec --no-startup-id albert &
 exec --no-startup-id dropbox &
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2 &
@@ -181,6 +178,3 @@ bindsym XF86AudioPrev exec playerctl previous
 bindsym $mod+n exec playerctl next
 bindsym $mod+p exec playerctl previous
 bindsym $mod+m exec playerctl play-pause
-
-# Quit System
-#bindsym Control+$mod+l exec ~/bin/blocklets/shutdown_menu

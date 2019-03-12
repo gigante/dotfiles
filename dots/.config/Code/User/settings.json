@@ -4,12 +4,12 @@
     //
     "editor.renderWhitespace": "all",
     // editor
-    "editor.fontFamily": "Fira Code, Fantasque Sans Mono, Monaco, monospace",
+    "editor.fontFamily": "'Fantasque Sans Mono', Fira Code, Monaco, monospace",
     "editor.fontLigatures": true,
     // terminal
     "terminal.integrated.shell.linux": "/bin/zsh",
     "terminal.external.linuxExec": "terminator",
-    "terminal.integrated.fontFamily": "Monaco",
+    "terminal.integrated.fontFamily": "'Fantasque Sans Mono'",
     "terminal.integrated.fontSize": 14,
     // Virtual Environments
     "python.venvPath": "~/.ve",
@@ -32,7 +32,6 @@
         "**/.DS_Store": true
     },
     "editor.minimap.enabled": false,
-    "window.zoomLevel": -1,
     "workbench.startupEditor": "newUntitledFile",
     "explorer.confirmDragAndDrop": false,
     "editor.rulers": [79],
@@ -50,5 +49,7 @@
     "workbench.sideBar.location": "left",
     "window.titleBarStyle": "custom",
     "editor.suggestSelection": "first",
-    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue"
+    "editor.fontSize": 15,
+    "window.zoomLevel": 0,
+    "workbench.iconTheme": "vscode-icons"
 }

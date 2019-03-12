@@ -5,6 +5,10 @@ dots/.config/Code/*
 # fonts
 dots/.fonts/.uuid
 
+# albert
+dots/.config/albert/*
+!dots/.config/albert/albert.conf
+
 # bin
 bin/bin/*
 !bin/bin/funcoeszz
