@@ -13,3 +13,4 @@ dots/.config/albert/*
 bin/bin/*
 !bin/bin/funcoeszz
 !bin/bin/blocklets
+!bin/bin/format
