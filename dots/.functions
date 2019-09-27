@@ -1,7 +1,10 @@
 md() { mkdir -p "$1" && cd "$1"; }
-screen() { echo "$1"; }
 
 x() { sh "$HOME/.screenlayout/$1.sh"; }
+
+# Hashes
+function sha1text() { ( echo -n "$*" | openssl sha1 ) }
+function md5text() { ( echo -n "$*" | openssl md5 ) }
 
 # systemd
 if which systemctl &>/dev/null; then
