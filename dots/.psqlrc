@@ -1,6 +1,7 @@
 \set QUIET 1
 \pset null '[NULL]'
 
+\set PROMPT1 '%M:%/ > '
 \set PROMPT2 '> '
 
 \encoding unicode
