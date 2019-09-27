@@ -29,7 +29,7 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the Pacman frontend.
-zstyle ':prezto:module:pacman' frontend 'yaourt'
+zstyle ':prezto:module:pacman' frontend 'yay'
 
 #
 # Prompt
