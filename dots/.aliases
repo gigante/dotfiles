@@ -10,6 +10,10 @@ alias umount="udiskie-umount"
 alias px='yay'
 alias dnf='sudo dnf'
 alias greload='gpg-connect-agent reloadagent /bye'
+alias dub='find -type f -exec du -Sh {} + | sort -rh | head -n 30'
+alias todo='todo.sh'
+alias copy='rsync -avhzP'
+alias artisan='php artisan'
 
 alias zreload='source $HOME/.zshrc'
 alias ed-zsh='$EDITOR $HOME/.zshrc'
@@ -19,3 +23,4 @@ alias ed-i3blocks='$EDITOR $HOME/.config/i3blocks/config'
 alias ed-aliases='$EDITOR $HOME/.aliases'
 alias ed-exports='$EDITOR $HOME/.exports'
 alias ed-functions='$EDITOR $HOME/.functions'
+alias ed-ssh="$EDITOR $HOME/.ssh/config"
