@@ -6,6 +6,12 @@ x() { sh "$HOME/.screenlayout/$1.sh"; }
 function sha1text() { ( echo -n "$*" | openssl sha1 ) }
 function md5text() { ( echo -n "$*" | openssl md5 ) }
 
+function touchpad() {
+  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
+  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 0
+  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Disable While Typing Enabled" 1
+}
+
 # systemd
 if which systemctl &>/dev/null; then
   start() { sudo systemctl start $1.service }

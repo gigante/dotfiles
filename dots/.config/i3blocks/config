@@ -4,54 +4,39 @@
 # name, separator, separator_block_width, short_text, signal, urgent
 
 # Global properties
-command=/usr/lib/i3blocks/$BLOCK_NAME
+command=~/bin/blocklets/$BLOCK_NAME
 separator_block_width=10
 markup=none
 
 [mediaplayer]
 label=
+instance=spotify
 interval=5
 signal=10
 
-[docker]
-command=~/bin/blocklets/docker
-color=#0db7ed
-label=
-interval=10
-
 [memory]
 label=
-command=~/bin/blocklets/memory
 instance=MEM
 markup=pango
 interval=30
 
 [cpu_usage]
 label=
-command=~/bin/blocklets/cpu_usage
 markup=pango
 interval=10
 
 [disk]
 label=
-command=~/bin/blocklets/disk
 markup=pango
 interval=30
 
-[bandwidth]
-command=~/bin/blocklets/bandwidth -i  -o 
-interval=2
-color=#799F26
-
 [volume]
-command=~/bin/blocklets/volume
 label=
 instance=Master
 interval=once
 signal=10
 
 [battery]
-command=~/bin/blocklets/battery
 markup=pango
 interval=30
 
