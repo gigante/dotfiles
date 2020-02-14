@@ -3,12 +3,12 @@
 function help_command() {
     cat <<END;
 Format Disk Utility
-Usage: format <device> <format> <label>
+Usage: format <device> <format>
 
 Examples:
-   format sdc1 ext4 'LNX'
-   format sdc1 ntfs 'WIN'
-   format sdc1 vfat 'USB'
+   format /dev/sdc1 ext4
+   format /dev/sdc1 ntfs
+   format /dev/sdc1 vfat
 END
     exit 1
 }
@@ -19,11 +19,11 @@ function main() {
     [[ -z "$1" ]] && help_command
 
     case "$2" in
-        ext4)  mkfs.ext4 /dev/$1 -L $3 ;;
+        ext4)  sudo mkfs.ext4 $1 -L 'LNX' ;;
 
-        ntfs)  mkfs.ntfs -f /dev/$1 -L $3 ;;
+        ntfs)  sudo mkfs.ntfs -f $1 -L 'WIN' ;;
 
-        vfat)  mkfs.vfat -n $3 -I /dev/$1 ;;
+        vfat)  sudo mkfs.vfat -F 32 -n 'USB' -I $1 ;;
 
         # Unknown command
         *)  err "Unknown command '$1'"; exit 2; ;;
