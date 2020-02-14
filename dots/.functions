@@ -6,10 +6,8 @@ x() { sh "$HOME/.screenlayout/$1.sh"; }
 function sha1text() { ( echo -n "$*" | openssl sha1 ) }
 function md5text() { ( echo -n "$*" | openssl md5 ) }
 
-function touchpad() {
-  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1
-  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 0
-  xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Disable While Typing Enabled" 1
+function iso() {
+  sudo dd bs=4M if=$2 of=/dev/$1 status=progress oflag=sync
 }
 
 # systemd
