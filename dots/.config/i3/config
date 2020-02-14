@@ -20,6 +20,9 @@ bindsym $mod+Shift+q kill
 # rofi
 bindsym $mod+d exec --no-startup-id rofi -show drun -display-combi " "
 
+# i3lock-fancy
+bindsym $mod+l exec i3lock-fancy
+
 # change focus
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
