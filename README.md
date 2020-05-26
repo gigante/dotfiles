@@ -2,8 +2,8 @@
 
 **Requirements:**
 
-[GNU Stow](https://www.gnu.org/software/stow/)
-
+- [GNU Stow](https://www.gnu.org/software/stow/)
+- This [Makefile](https://github.com/gigante/dotfiles/blob/master/Makefile) contains all requirements
 
 **To install:**
 
