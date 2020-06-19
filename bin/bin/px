@@ -1,0 +1,50 @@
+#!/bin/sh
+
+function help() {
+    cat <<END
+PX - aliases for distro package managers
+Usage: px <command> [<args>]
+
+Some useful dk commands are:
+   add     install package
+   rm      remove package
+   up      upgrade packages
+   clean   cleanup cache
+   <pkg>   search for <pkg> package
+END
+    exit 1
+}
+
+function run_yay() {
+    case "$1" in
+    add) yay -S "$2" ;;
+    rm) yay -R "$2" ;;
+    up) yay -Syyu ;;
+    clean) yay -Sc ;;
+    *) yay "$1" ;;
+    esac
+}
+
+function run_dnf() {
+    case "$1" in
+    add) sudo dnf install -y "$2" ;;
+    rm) sudo dnf remove "$2" ;;
+    up) sudo dnf upgrade ;;
+    clean) sudo dnf clean all ;;
+    *) sudo dnf search "$1" ;;
+    esac
+}
+
+function main() {
+    [[ -z "$1" ]] && help && exit 1
+
+    distro=$(sed -n 's/^ID=//p' /etc/os-release)
+
+    case "$distro" in
+    arch) run_yay $1 $2 ;;
+    fedora) run_dnf $1 $2 ;;
+    *) echo "px doesnt support your distro" ;;
+    esac
+}
+
+main "$@"

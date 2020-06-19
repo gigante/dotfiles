@@ -1,0 +1,57 @@
+#!/bin/sh
+
+function help() {
+    cat <<END
+Docker aliases
+Usage: dk <command> [<args>]
+
+Some useful dk commands are:
+   ls     list images
+   ps     list active containers
+   sh     shell into <img>
+   clean  cleanup unused resources
+END
+    exit 1
+}
+
+function sh() {
+    if [[ -z "$3" ]]; then
+        docker run -it $2 '/bin/sh'
+    else
+        docker run -it $2 "${@:3}"
+    fi
+}
+
+function clean() {
+    echo '-> removing <none> images'
+    noneimgs=$(docker images -a | grep "^<none>" | awk '{ print $3 }')
+    [[ ! -z "$noneimgs" ]] && echo docker rmi $noneimg
+
+    echo '-> removing dangling images'
+    dangling=$(docker images -f "dangling=true" -q)
+    [[ ! -z "$dangling" ]] && docker rmi $dangling
+
+    echo '-> removing stopped containers'
+    stopped=$(docker ps -a -q)
+    [[ ! -z "$stopped" ]] && docker rm $stopped
+
+    echo '-> removing all unused networks'
+    docker network prune -f
+
+    echo '-> removing all unused local volumes'
+    docker volume prune -f
+}
+
+function main() {
+    [[ -z "$1" ]] && help && exit 1
+
+    case "$1" in
+    ls) docker images --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.Size}}" "${@:2}" | tail -n +2 | sort -d ;;
+    ps) docker ps --format "table {{.Names}}\t{{.Image}}:{{.ID}}\t{{.Status}}" "${@:2}" | tail -n +2 | sort -d ;;
+    sh) sh "$@" ;;
+    clean) clean ;;
+    *) docker "$@" ;;
+    esac
+}
+
+main "$@"

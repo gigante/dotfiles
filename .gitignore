@@ -14,3 +14,10 @@ bin/bin/*
 !bin/bin/funcoeszz
 !bin/bin/blocklets
 !bin/bin/format
+!bin/bin/px
+!bin/bin/dk
+
+# gnupg
+dots/*
+!dots/gpg.conf
+!dots/gpg-agent.conf
