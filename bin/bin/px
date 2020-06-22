@@ -30,8 +30,18 @@ function run_dnf() {
     add) sudo dnf install -y "$2" ;;
     rm) sudo dnf remove "$2" ;;
     up) sudo dnf upgrade ;;
-    clean) sudo dnf clean all ;;
+    clean) sudo dnf autoremove -y && sudo dnf clean all ;;
     *) sudo dnf search "$1" ;;
+    esac
+}
+
+function run_apt() {
+    case "$1" in
+    add) sudo apt install -y "$2" ;;
+    rm) sudo apt remove -y "$2" ;;
+    up) sudo apt update && sudo apt upgrade ;;
+    clean) sudo apt autoremove -y ;;
+    *) sudo apt search "$1" ;;
     esac
 }
 
@@ -43,6 +53,7 @@ function main() {
     case "$distro" in
     arch) run_yay $1 $2 ;;
     fedora) run_dnf $1 $2 ;;
+    debian | ubuntu) run_apt $1 $2 ;;
     *) echo "px doesnt support your distro" ;;
     esac
 }
