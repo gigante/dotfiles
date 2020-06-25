@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function help() {
     cat <<END
@@ -16,44 +16,52 @@ END
 }
 
 function run_yay() {
-    case "$1" in
-    add) yay -S "$2" ;;
-    rm) yay -R "$2" ;;
+    command=$1
+    pkg=$2
+    case "$command" in
+    add) yay -S "$pkg" ;;
+    rm) yay -R "$pkg" ;;
     up) yay -Syyu ;;
     clean) yay -Sc ;;
-    *) yay "$1" ;;
+    *) yay "$command" ;;
     esac
 }
 
 function run_dnf() {
-    case "$1" in
-    add) sudo dnf install -y "$2" ;;
-    rm) sudo dnf remove "$2" ;;
+    command=$1
+    pkg=$2
+    case "$command" in
+    add) sudo dnf install -y "$pkg" ;;
+    rm) sudo dnf remove "$pkg" ;;
     up) sudo dnf upgrade ;;
     clean) sudo dnf autoremove -y && sudo dnf clean all ;;
-    *) sudo dnf search "$1" ;;
+    *) sudo dnf search "$command" ;;
     esac
 }
 
 function run_apt() {
-    case "$1" in
-    add) sudo apt install -y "$2" ;;
-    rm) sudo apt remove -y "$2" ;;
+    command=$1
+    pkg=$2
+    case "$command" in
+    add) sudo apt install -y "$pkg" ;;
+    rm) sudo apt remove -y "$pkg" ;;
     up) sudo apt update && sudo apt upgrade ;;
     clean) sudo apt autoremove -y ;;
-    *) sudo apt search "$1" ;;
+    *) sudo apt search "$command" ;;
     esac
 }
 
 function main() {
-    [[ -z "$1" ]] && help && exit 1
+    command=$1
+    [[ -z "$command" ]] && help && exit 1
 
     distro=$(sed -n 's/^ID=//p' /etc/os-release)
+    pkg=$2
 
     case "$distro" in
-    arch) run_yay $1 $2 ;;
-    fedora) run_dnf $1 $2 ;;
-    debian | ubuntu) run_apt $1 $2 ;;
+    arch) run_yay $command $pkg ;;
+    fedora) run_dnf $command $pkg ;;
+    debian | ubuntu) run_apt $command $pkg ;;
     *) echo "px doesnt support your distro" ;;
     esac
 }
