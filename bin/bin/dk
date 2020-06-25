@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 function help() {
     cat <<END
@@ -9,17 +9,26 @@ Some useful dk commands are:
    ls     list images
    ps     list active containers
    sh     shell into <img>
+   bind   create volume with current dir and sh <img>
    clean  cleanup unused resources
 END
     exit 1
 }
 
 function sh() {
-    if [[ -z "$3" ]]; then
-        docker run -it $2 '/bin/sh'
+    img=$2
+    command=$3
+    if [[ -z "$command" ]]; then
+        docker run -it --rm $img '/bin/sh'
     else
-        docker run -it $2 "${@:3}"
+        docker run -it --rm $img "${@:3}"
     fi
+}
+
+function bind() {
+    img=$2
+    dir=$(basename "$PWD")
+    docker run -it --rm -v $(pwd):/mnt/$dir -w /mnt/$dir $img /bin/sh
 }
 
 function clean() {
@@ -35,20 +44,22 @@ function clean() {
     stopped=$(docker ps -a -q)
     [[ ! -z "$stopped" ]] && docker rm $stopped
 
-    echo '-> removing all unused networks'
+    echo '-> removing unused networks'
     docker network prune -f
 
-    echo '-> removing all unused local volumes'
+    echo '-> removing unused local volumes'
     docker volume prune -f
 }
 
 function main() {
-    [[ -z "$1" ]] && help && exit 1
+    command=$1
+    [[ -z "$command" ]] && help && exit 1
 
-    case "$1" in
+    case "$command" in
     ls) docker images --format "table {{.Repository}}:{{.Tag}}\t{{.ID}}\t{{.Size}}" "${@:2}" | tail -n +2 | sort -d ;;
     ps) docker ps --format "table {{.Names}}\t{{.Image}}:{{.ID}}\t{{.Status}}" "${@:2}" | tail -n +2 | sort -d ;;
     sh) sh "$@" ;;
+    bind) bind "$@" ;;
     clean) clean ;;
     *) docker "$@" ;;
     esac
