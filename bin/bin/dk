@@ -9,6 +9,7 @@ Some useful dk commands are:
    ls     list images
    ps     list active containers
    sh     shell into <img>
+   gz     save <image> to *.tar.gz
    bind   create volume with current dir and sh <img>
    clean  cleanup unused resources
 END
@@ -29,6 +30,12 @@ function bind() {
     img=$2
     dir=$(basename "$PWD")
     docker run -it --rm -v $(pwd):/mnt/$dir -w /mnt/$dir $img /bin/sh
+}
+
+function gz() {
+    img=$1
+    filename=$(echo $img | sed 's/:/_/');
+    docker save $img | gzip > $filename.tar.gz
 }
 
 function clean() {
@@ -61,6 +68,7 @@ function main() {
     sh) sh "$@" ;;
     bind) bind "$@" ;;
     clean) clean ;;
+    gz) gz $2 ;;
     *) docker "$@" ;;
     esac
 }
