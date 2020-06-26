@@ -9,6 +9,7 @@ Some useful dk commands are:
    add     install package
    rm      remove package
    up      upgrade packages
+   sync    update repo list
    clean   cleanup cache
    <pkg>   search for <pkg> package
 END
@@ -16,47 +17,50 @@ END
 }
 
 function run_yay() {
-    command=$1
-    pkg=$2
     case "$command" in
     add) yay -S "$pkg" ;;
     rm) yay -R "$pkg" ;;
     up) yay -Syyu ;;
+    sync) yay -Sy ;;
     clean) yay -Sc ;;
     *) yay "$command" ;;
     esac
 }
 
+function run_pacman() {
+    case "$command" in
+    add) sudo pacman -S "$pkg" --noconfirm ;;
+    rm) sudo pacman -R "$pkg" ;;
+    up) sudo pacman -Syu ;;
+    sync) sudo pacman -Sy ;;
+    clean) sudo pacman -Scc ;;
+    *) pacman -Ss "$command" ;;
+    esac
+}
+
 function run_dnf() {
-    command=$1
-    pkg=$2
     case "$command" in
     add) sudo dnf install -y "$pkg" ;;
     rm) sudo dnf remove "$pkg" ;;
-    up) sudo dnf upgrade ;;
+    up | sync) sudo dnf upgrade ;;
     clean) sudo dnf autoremove -y && sudo dnf clean all ;;
     *) sudo dnf search "$command" ;;
     esac
 }
 
 function run_apt() {
-    command=$1
-    pkg=$2
     case "$command" in
     add) sudo apt install -y "$pkg" ;;
     rm) sudo apt remove -y "$pkg" ;;
-    up) sudo apt update && sudo apt upgrade ;;
+    up) sudo apt upgrade ;;
+    sync) sudo apt update ;;
     clean) sudo apt autoremove -y ;;
     *) sudo apt search "$command" ;;
     esac
 }
 
 function main() {
-    command=$1
     [[ -z "$command" ]] && help && exit 1
-
-    distro=$(sed -n 's/^ID=//p' /etc/os-release)
-    pkg=$2
 
     case "$distro" in
     arch) run_yay $command $pkg ;;
@@ -65,5 +69,9 @@ function main() {
     *) echo "px doesnt support your distro" ;;
     esac
 }
+
+distro=$(sed -n 's/^ID=//p' /etc/os-release)
+command=$1
+pkg=$2
 
 main "$@"
