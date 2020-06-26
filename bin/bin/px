@@ -54,7 +54,7 @@ function run_apt() {
     rm) sudo apt remove -y "$pkg" ;;
     up) sudo apt upgrade ;;
     sync) sudo apt update ;;
-    clean) sudo apt autoremove -y ;;
+    clean) sudo apt autoremove && sudo apt clean ;;
     *) sudo apt search "$command" ;;
     esac
 }
