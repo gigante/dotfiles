@@ -14,8 +14,6 @@ bin/bin/*
 !bin/bin/funcoeszz
 !bin/bin/blocklets
 !bin/bin/format
-!bin/bin/px
-!bin/bin/dk
 
 # gnupg
 dots/*
