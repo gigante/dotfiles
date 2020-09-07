@@ -16,6 +16,6 @@ bin/bin/*
 !bin/bin/format
 
 # gnupg
-dots/*
-!dots/gpg.conf
-!dots/gpg-agent.conf
+/dots/.gnupg/*
+!/dots/.gnupg/gpg.conf
+!/dots/.gnupg/gpg-agent.conf
