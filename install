@@ -4,7 +4,7 @@ function run_arch() {
     case "$command" in
     basic)
         echo -e "${GREEN}--> Installing tools"
-        $px bat neofetch nmap feh pass expect tree wget whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
+        $px bat neofetch nmap feh pass expect tree wget zsh whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
 	    $px xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
 	    $px gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
 	    $px playerctl lm_sensors sysstat acpi inotify-tools
