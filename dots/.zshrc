@@ -8,4 +8,3 @@ setopt CLOBBER # overwrite existing files with '>'
 source $HOME/.exports
 source $HOME/.aliases
 source $HOME/.functions
-source $HOME/.user
