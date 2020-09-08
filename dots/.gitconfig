@@ -19,16 +19,10 @@
   default = current
 [core]
   excludesfile = ~/.gitignore
+[include]
+  path = ~/.gituser
 [color "diff-highlight"]
   newHighlight = green reverse
   newNormal = green
   oldHighlight = red reverse
   oldNormal = red
-[alias]
-  branches = !legit branches
-  publish = !legit publish
-  unpublish = !legit unpublish
-  sync = !legit sync
-  switch = !legit switch
-  resync = !legit resync
-  undo = !legit undo
