@@ -1,5 +1,4 @@
 alias ll="ls -FGlahs"
-alias upsa='eval "$(ssh-agent -s)"'
 alias grep="grep --color=auto"
 alias cat='bat'
 alias compose="docker-compose"
@@ -7,14 +6,14 @@ alias manage='python manage.py' # django
 alias kb='setxkbmap -model abnt2 -layout br -variant abnt2'
 alias mount="udiskie-mount"
 alias umount="udiskie-umount"
-alias greload='gpg-connect-agent reloadagent /bye'
+alias gr='gpg-connect-agent reloadagent /bye'
 alias dub='find -type f -exec du -Sh {} + | sort -rh | head -n 30'
 alias todo='todo.sh'
 alias copy='rsync -avhzP'
 alias artisan='php artisan'
 alias fw='sudo firewall-cmd'
 
-alias zreload='source $HOME/.zshrc'
+alias zr='source $HOME/.zshrc'
 alias ed-zsh='$EDITOR $HOME/.zshrc'
 alias ed-hosts='sudo $EDITOR /etc/hosts'
 alias ed-i3='$EDITOR $HOME/.config/i3/config'
