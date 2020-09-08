@@ -8,21 +8,31 @@ function run_arch() {
         $px xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
         $px gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
         $px playerctl lm_sensors sysstat acpi inotify-tools
+
         echo -e "${GREEN}--> Installing fonts"
         $px ttf-bitstream-vera ttf-dejavu ttf-mac-fonts ttf-monaco ttf-ms-fonts
         ;;
     dev)
         echo -e "${GREEN}Installing php${NC}"
         $px php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug
+
         echo -e "${GREEN}Installing java${NC}"
         $px jdk jdk-openjdk icedtea-web
+
         echo -e "${GREEN}Installing elixir, go, nodejs, npm and dotnet${NC}"
         $px elixir go nodejs npm yarn dotnet-sdk
+
+        echo -e "${GREEN}Installing PostgreSQL${NC}"
+        $px postgresql
+        sudo -iu postgres initdb -D /var/lib/postgres/data
+        sudo systemctl start postgresql.service
+
         echo -e "${GREEN}Installing virtualbox${NC}"
         $px virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant
+
         echo -e "${GREEN}Installing docker and docker-compose${NC}"
         $px docker docker-compose
-        sudo usermod -aG docker $(USER)
+        sudo usermod -aG docker "$(USER)"
         ;;
     apps)
         echo -e "${GREEN}Installing apps${NC}"
@@ -39,10 +49,10 @@ function run_fedora() {
     case "$command" in
     basic)
         echo -e "${GREEN}--> Basic configs${NC}"
-        sudoecho -e "${GREEN}Config Docker${NC}" usermod -aG wheel $(USER)
+        sudoecho -e "${GREEN}Config Docker${NC}" usermod -aG wheel "$(USER)"
         sudo sed -i "/SELINUX=.*/c\SELINUX=permissive" /etc/selinux/config
-        $dnfi https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
-        $dnfi https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        $dnfi "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+        $dnfi "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
         sudo dnf update
 
         echo -e "${GREEN}--> Installing tools"
@@ -54,7 +64,7 @@ function run_fedora() {
     dev)
         echo -e "${GREEN}Installing golang${NC}"
         $dnfi golang
-        mkdir -p $HOME/go
+        mkdir -p "$HOME"/go
 
         echo -e "${GREEN}Installing PHP packages${NC}"
         $dnfi php php-cli php-common php-gd php-json php-mbstring php-mcrypt php-opcache php-pdo php-pear php-pgsql
@@ -82,10 +92,10 @@ function run_fedora() {
 
         $dnfi dnf-plugins-core
         sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-        sudo sed -i 's/$releasever/${DOCKER_FEDORA}/g' /etc/yum.repos.d/docker-ce.repo
+        sudo sed -i 's/$releasever/"'"${DOCKER_FEDORA}"'"/g' /etc/yum.repos.d/docker-ce.repo
         $dnfi docker-ce docker-ce-cli containerd.io
         sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-        sudo usermod -aG docker $USER
+        sudo usermod -aG docker "$USER"
 
         echo -e "${GREEN}Installing Docker compose${NC}"
         sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -96,8 +106,8 @@ function run_fedora() {
         $dnfi gnome-tweak-tool terminator vlc audacity rclone transmission filezilla emacs
 
         echo -e "${GREEN}Installing dropbox${NC}"
-        cd $HOME && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
-        $HOME/.dropbox-dist/dropboxd
+        cd "$HOME" && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+        "$HOME"/.dropbox-dist/dropboxd
 
         echo -e "${GREEN}Installing Google Chrome${NC}"
         sudo dnf install fedora-workstation-repositories

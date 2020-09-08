@@ -67,5 +67,5 @@ bin:
 	@curl -sL https://git.io/JJvpl | bash -
 
 pg:
-	@sudo -u postgres createuser -P -s -e $(USER)
+	@sudo -iu postgres createuser -P -s -e $(USER)
 	@createdb $(USER)
