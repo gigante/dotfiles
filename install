@@ -1,0 +1,135 @@
+#!/bin/bash
+
+function run_arch() {
+    case "$command" in
+    basic)
+        echo -e "${GREEN}--> Installing tools"
+        $px bat neofetch nmap feh pass expect tree wget whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
+	    $px xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
+	    $px gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
+	    $px playerctl lm_sensors sysstat acpi inotify-tools
+        echo -e "${GREEN}--> Installing fonts"
+        $px ttf-bitstream-vera ttf-dejavu ttf-mac-fonts ttf-monaco ttf-ms-fonts
+        ;;
+    dev)
+        echo -e "${GREEN}Installing php${NC}"
+	    $px php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug
+	    echo -e "${GREEN}Installing java${NC}"
+	    $px jdk jdk-openjdk icedtea-web
+        echo -e "${GREEN}Installing elixir, go, nodejs, npm and dotnet${NC}"
+	    $px elixir go nodejs npm yarn dotnet-sdk
+        echo -e "${GREEN}Installing virtualbox${NC}"
+        $px virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant
+        echo -e "${GREEN}Installing docker and docker-compose${NC}"
+        $px docker docker-compose
+	    sudo usermod -aG docker $(USER)
+        ;;
+    apps)
+        echo -e "${GREEN}Installing apps${NC}"
+        $px rofi nautilus evince eog gimp libreoffice vlc spotify audacity dropbox rclone transmission filezilla
+	    $px firefox google-chrome emacs visual-studio-code-bin
+        echo -e "${GREEN}Installing TLP${NC}"
+        sudo systemctl start tlp.service
+        sudo systemctl enable tlp.service
+        ;;
+    esac
+}
+
+function run_fedora() {
+    case "$command" in
+    basic)
+        echo -e "${GREEN}--> Basic configs${NC}"
+        sudoecho -e "${GREEN}Config Docker${NC}" usermod -aG wheel $(USER)
+        sudo sed -i "/SELINUX=.*/c\SELINUX=permissive" /etc/selinux/config
+        $dnfi https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+        $dnfi https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+        sudo dnf update
+
+        echo -e "${GREEN}--> Installing tools"
+        sudo dnf groupinstall -y 'Development Tools'
+        $dnfi util-linux-user redhat-rpm-config curl wget zsh stow nano bat pass expect neofetch ImageMagick
+        $dnfi gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel
+        $dnfi libyaml-devel libffi-devel gdbm-devel ncurses-devel
+        ;;
+    dev)
+        echo -e "${GREEN}Installing golang${NC}"
+        $dnfi golang
+        mkdir -p $HOME/go
+
+        echo -e "${GREEN}Installing PHP packages${NC}"
+        $dnfi php php-cli php-common php-gd php-json php-mbstring php-mcrypt php-opcache php-pdo php-pear php-pgsql
+        $dnfi php-mysqlnd php-mysqli php-process php-xml php-pecl-zip php-imap php-intl php-pecl-apcu php-soap
+
+        echo -e "${GREEN}Installing Java packages${NC}"
+        $dnfi java-1.8.0-openjdk java-1.8.0-openjdk-devel icedtea-web
+        $dnfi java-11-openjdk java-11-openjdk-devel
+        $dnfi java-latest-openjdk java-latest-openjdk-devel
+
+        echo -e "${GREEN}Installing DotNet packages${NC}"
+        $dnfi dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1
+
+        echo -e "${GREEN}Installing Elixir, NodeJS and npm${NC}"
+        $dnfi elixir nodejs npm
+
+        echo -e "${GREEN}Installing PostgreSQL${NC}"
+        $dnfi postgresql postgresql-server postgresql-contrib
+        sudo postgresql-setup --initdb --unit postgresql
+        sudo systemctl start postgresql.service
+
+        echo -e "${GREEN}Installing Docker${NC}"
+        sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest docker-latest-logrotate
+        sudo dnf remove -y docker-logrotate docker-selinux docker-engine-selinux docker-engine
+
+        $dnfi dnf-plugins-core
+        sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+        sudo sed -i 's/$releasever/${DOCKER_FEDORA}/g' /etc/yum.repos.d/docker-ce.repo
+        $dnfi docker-ce docker-ce-cli containerd.io
+        sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+        sudo usermod -aG docker $USER
+
+        echo -e "${GREEN}Installing Docker compose${NC}"
+        sudo curl -L "https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE}/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        ;;
+    apps)
+        echo -e "${GREEN}Installing apps${NC}"
+        $dnfi gnome-tweak-tool terminator vlc audacity rclone transmission filezilla emacs
+
+        echo -e "${GREEN}Installing dropbox${NC}"
+        cd $HOME && wget -O - "https://www.dropbox.com/download?plat=lnx.x86_64" | tar xzf -
+        $HOME/.dropbox-dist/dropboxd
+
+        echo -e "${GREEN}Installing Google Chrome${NC}"
+        sudo dnf install fedora-workstation-repositories
+        sudo dnf config-manager --set-enabled google-chrome
+        $dnfi google-chrome-stable
+
+        echo -e "${GREEN}Installing VSCode${NC}"
+        sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+        sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+        sudo dnf check-update
+        sudo dnf install code
+        ;;
+    esac
+}
+
+function main() {
+    case "$distro" in
+    arch) run_arch "$command" ;;
+    fedora) run_fedora "$command" ;;
+    esac
+}
+
+NC='\033[0m'
+GREEN='\033[0;32m'
+
+distro=$(sed -n 's/^ID=//p' /etc/os-release)
+command=$1
+
+DOCKER_FEDORA=31 # https://download.docker.com/linux/fedora/
+DOCKER_COMPOSE=$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)
+
+dnfi='sudo dnf install -y'
+px='sudo pacman -S --noconfirm'
+
+main "$@"

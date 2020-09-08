@@ -1,55 +1,71 @@
-.PHONY: dots php pyenv rbenv lein basic dev apps virtualbox docker fonts
+PY := 3.8.5
+RB := 2.7.1
 
-export PY_VERSION=3.8.2
-export RB_VERSION=2.7.1
-export PY_PATH=$(HOME)/.pyenv
-export RB_PATH=$(HOME)/.rbenv
+help:
+	@echo
+	@echo ".   ,     ,             .      "
+	@echo "|\ /|     |        ,- o |      "
+	@echo "| V | ,-: | , ,-.  |  . | ,-.  "
+	@echo "|   | | | |<  |-'  |- | | |-'  "
+	@echo "'   ' '-' ' \` '-'  |  ' ' '-' "
+	@echo "                  -'           "
+	@echo "Available target rules"
+	@echo
+	@echo "--- install ---"
+	@echo "basic  basic packages"
+	@echo "dev    development packages"
+	@echo "apps   apps"
+	@echo
+	@echo "--- shell ---"
+	@echo "dots    symlink dotfiles"
+	@echo "prezto  config prezto"
+	@echo "rbenv   config rbenv"
+	@echo "pyenv   config pyenv"
+	@echo "bin     download binaries"
+	@echo
+	@echo "--- database ---"
+	@echo "pg  create user, pass and db"
+
+basic:
+	@$$(which bash) ./install basic
+
+dev:
+	@$$(which bash) ./install dev
+
+apps:
+	@$$(which bash) ./install apps
 
 dots:
-	@yay -S stow
+	$(info --> Config dots)
 	@rm -rf $(HOME)/.xinitrc $(HOME)/.config/{user-dirs.dirs,user-dirs.locale}
 	@stow bin && stow dots
 
-php:
-	@yay -S php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug
-	@curl -sS https://getcomposer.org/installer | php -- --install-dir=$(HOME)/bin --filename=composer
-
-pyenv:
-	@git clone https://github.com/pyenv/pyenv.git $(HOME)/.pyenv
-	@${PY_PATH}/bin/pyenv install ${PY_VERSION} && ${PY_PATH}/bin/pyenv global ${PY_VERSION}
+prezto:
+	$(info --> Config prezto)
+	@$$(which zsh) ./prezto.sh
 
 rbenv:
+	$(info --> Installing rbenv)
 	@git clone https://github.com/rbenv/rbenv.git $(HOME)/.rbenv
-	@mkdir -p ${RB_PATH}/plugins
-	@git clone https://github.com/rbenv/ruby-build.git ${RB_PATH}/plugins/ruby-build
-	@${RB_PATH}/bin/rbenv install ${RB_VERSION} && ${RB_PATH}/bin/rbenv global ${RB_VERSION}
+	@mkdir -p $(HOME)/.rbenv/plugins
+	@git clone https://github.com/rbenv/ruby-build.git $(HOME)/.rbenv/plugins/ruby-build
+	@$(HOME)/.rbenv/bin/rbenv install ${RB} && $(HOME)/.rbenv/bin/rbenv global ${RB}
+	@gem update && gem install pry pry-meta
 
-lein:
+pyenv:
+	$(info --> Installing pyenv)
+	@git clone https://github.com/pyenv/pyenv.git $(HOME)/.pyenv
+	@$(HOME)/.pyenv/bin/pyenv install ${PY} && $(HOME)/.pyenv/bin/pyenv global ${PY}
+	@pip install -U pip setuptools youtube-dl pipenv
+
+bin:
+	$(info --> Downloading composer)
+	@curl -sS https://getcomposer.org/installer | php -- --install-dir=$(HOME)/bin --filename=composer
+	$(info --> Downloading leiningen)
 	@wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -O $(HOME)/bin/lein && chmod +x $(HOME)/bin/lein
+	$(info --> Downloading sh tools)
+	@curl -sL https://git.io/JJvpl | bash -
 
-basic:
-	@yay -S bat neofetch nmap feh pass expect qrencode xclip tree wget whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
-	@yay -S xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
-	@yay -S gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
-	@yay -S playerctl lm_sensors sysstat acpi inotify-tools
-
-dev:
-	@yay -S jdk jdk-openjdk icedtea-web elixir go nodejs npm dotnet-sdk
-
-apps:
-	@yay -S rofi nautilus evince eog gimp libreoffice vlc spotify audacity dropbox rclone transmission filezilla
-	@yay -S firefox google-chrome emacs visual-studio-code-bin
-
-virtualbox:
-	@yay -S virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant
-
-docker:
-	@yay -S docker docker-compose ctop-bin
-	@sudo usermod -aG docker $(USER)
-
-fonts:
-	@yay -S otf-font-awesome ttf-bitstream-vera ttf-dejavu ttf-fantasque-sans-mono ttf-fira-code ttf-hack ttf-mac-fonts ttf-monaco ttf-ms-fonts
-
-home: php pyenv rbenv lein
-
-install: basic dev apps virtualbox docker fonts
+pg:
+	@sudo -u postgres createuser -P -s -e $(USER)
+	@createdb $(USER)
