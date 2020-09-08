@@ -5,29 +5,29 @@ function run_arch() {
     basic)
         echo -e "${GREEN}--> Installing tools"
         $px bat neofetch nmap feh pass expect tree wget zsh whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
-	    $px xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
-	    $px gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
-	    $px playerctl lm_sensors sysstat acpi inotify-tools
+        $px xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
+        $px gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
+        $px playerctl lm_sensors sysstat acpi inotify-tools
         echo -e "${GREEN}--> Installing fonts"
         $px ttf-bitstream-vera ttf-dejavu ttf-mac-fonts ttf-monaco ttf-ms-fonts
         ;;
     dev)
         echo -e "${GREEN}Installing php${NC}"
-	    $px php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug
-	    echo -e "${GREEN}Installing java${NC}"
-	    $px jdk jdk-openjdk icedtea-web
+        $px php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug
+        echo -e "${GREEN}Installing java${NC}"
+        $px jdk jdk-openjdk icedtea-web
         echo -e "${GREEN}Installing elixir, go, nodejs, npm and dotnet${NC}"
-	    $px elixir go nodejs npm yarn dotnet-sdk
+        $px elixir go nodejs npm yarn dotnet-sdk
         echo -e "${GREEN}Installing virtualbox${NC}"
         $px virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant
         echo -e "${GREEN}Installing docker and docker-compose${NC}"
         $px docker docker-compose
-	    sudo usermod -aG docker $(USER)
+        sudo usermod -aG docker $(USER)
         ;;
     apps)
         echo -e "${GREEN}Installing apps${NC}"
         $px rofi nautilus evince eog gimp libreoffice vlc spotify audacity dropbox rclone transmission filezilla
-	    $px firefox google-chrome emacs visual-studio-code-bin
+        $px firefox google-chrome emacs visual-studio-code-bin
         echo -e "${GREEN}Installing TLP${NC}"
         sudo systemctl start tlp.service
         sudo systemctl enable tlp.service
