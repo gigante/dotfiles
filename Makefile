@@ -1,5 +1,8 @@
+.PHONY: help basic dev apps dots prezto rbenv pyenv bin pg
+
 PY := 3.8.5
 RB := 2.7.1
+distro = arch
 
 help:
 	@echo
@@ -16,6 +19,10 @@ help:
 	@echo "dev    development packages"
 	@echo "apps   apps"
 	@echo
+	@echo "Examples:"
+	@echo "  $$ make basic distro=fedora"
+	@echo "  $$ make dev distro=arch"
+	@echo
 	@echo "--- shell ---"
 	@echo "dots    symlink dotfiles"
 	@echo "prezto  config prezto"
@@ -27,13 +34,13 @@ help:
 	@echo "pg  create user, pass and db"
 
 basic:
-	@$$(which bash) ./install basic
+	@$(MAKE) -f ${distro}.mk basic
 
 dev:
-	@$$(which bash) ./install dev
+	@$(MAKE) -f ${distro}.mk dev
 
 apps:
-	@$$(which bash) ./install apps
+	@$(MAKE) -f ${distro}.mk apps
 
 dots:
 	$(info --> Config dots)
