@@ -1,14 +1,13 @@
+#!/bin/bash
+
 # editor
 export EDITOR='nano'
 export VISUAL='nano'
 export PAGER='less'
 
-# gpg key
-export GPGKEY=XY
-
 # lang
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
 
 # rbenv
 export PATH="$HOME/.rbenv/bin:$PATH"
@@ -23,7 +22,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 # Go
-export GOPATH=$HOME/go
+export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # bin
@@ -34,4 +33,5 @@ export PATH="$HOME/.config/composer/vendor/bin:$PATH"
 
 # funcoeszz
 export ZZPATH="$HOME/bin/funcoeszz"
-source $HOME/.zzzshrc
+# shellcheck disable=SC1090
+source "$HOME/.zzzshrc"
