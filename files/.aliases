@@ -1,6 +1,7 @@
 #!/bin/bash
 
 alias ll='ls -FGlahs'
+alias upsa='eval "$(ssh-agent -s)"'
 alias grep='grep --color=auto'
 alias cat='bat'
 alias compose='docker-compose'
