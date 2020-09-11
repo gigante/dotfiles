@@ -1,21 +1,21 @@
 # vscode
-dots/.config/Code/*
-!dots/.config/Code/User/settings.json
+/files/.config/Code/*
+!/files/.config/Code/User/settings.json
 
 # fonts
-dots/.fonts/.uuid
+/files/.fonts/.uuid
 
 # albert
-dots/.config/albert/*
-!dots/.config/albert/albert.conf
+/files/.config/albert/*
+!/files/.config/albert/albert.conf
 
 # bin
-bin/bin/*
-!bin/bin/funcoeszz
-!bin/bin/blocklets
-!bin/bin/format
+/files/bin/*
+!/files/bin/funcoeszz
+!/files/bin/blocklets
+!/files/bin/format
 
 # gnupg
-/dots/.gnupg/*
-!/dots/.gnupg/gpg.conf
-!/dots/.gnupg/gpg-agent.conf
+/files/.gnupg/*
+!/files/.gnupg/gpg.conf
+!/files/.gnupg/gpg-agent.conf

@@ -49,7 +49,7 @@ dots:
 
 prezto:
 	$(info --> Config prezto)
-	@$$(which zsh) ./prezto.sh
+	@-zsh ./prezto.sh
 
 rbenv:
 	$(info --> Installing rbenv)
@@ -57,7 +57,7 @@ rbenv:
 	@mkdir -p $(HOME)/.rbenv/plugins
 	@git clone https://github.com/rbenv/ruby-build.git $(HOME)/.rbenv/plugins/ruby-build
 	@$(HOME)/.rbenv/bin/rbenv install ${RB} && $(HOME)/.rbenv/bin/rbenv global ${RB}
-	@gem update && gem install pry pry-meta
+	@gem update && gem install pry pry-meta rails
 
 pyenv:
 	$(info --> Installing pyenv)
