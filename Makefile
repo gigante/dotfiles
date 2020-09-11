@@ -45,7 +45,7 @@ apps:
 dots:
 	$(info --> Config dots)
 	@rm -rf $(HOME)/.xinitrc $(HOME)/.config/{user-dirs.dirs,user-dirs.locale}
-	@stow bin && stow dots
+	@stow files
 
 prezto:
 	$(info --> Config prezto)
