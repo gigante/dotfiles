@@ -2,7 +2,7 @@
 
 basic:
 	$(info --> Installing tools)
-	sudo pacman -S --noconfirm bat neofetch nmap feh pass expect tree wget zsh whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
+	sudo pacman -S --noconfirm bat neofetch nmap feh pass expect tree wget zsh stow whois pdftk picom scrot i3lock-fancy htop upx imagemagick gist heroku-cli
 	sudo pacman -S --noconfirm xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie
 	sudo pacman -S --noconfirm gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb
 	sudo pacman -S --noconfirm playerctl lm_sensors sysstat acpi inotify-tools
