@@ -5,9 +5,9 @@ DOCKER_COMPOSE = $$(curl --silent https://api.github.com/repos/docker/compose/re
 
 basic:
 	$(info --> Basic configs)
+	#sudo dnf install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 	sudo sed -i "/SELINUX=.*/c\SELINUX=permissive" /etc/selinux/config
-	sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
-	sudo dnf install -y "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+	## add rpm fusion
 	sudo dnf update
 
 	$(info --> Installing tools)
