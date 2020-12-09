@@ -17,16 +17,6 @@ ${YELLOW}Some useful commands are:${NC}
     exit 1
 }
 
-
-
-
-
-
-
-
-
-
-
 function basic() {
     case "$DISTRO" in
     arch)
@@ -58,7 +48,7 @@ function dev() {
         echo -e "${GREEN}Configuring${NC}"
         sudo -iu postgres initdb -D /var/lib/postgres/data
 	    sudo systemctl start postgresql.service
-	    sudo usermod -aG docker "$NEWUSER" ;;
+	    sudo usermod -aG docker "$USER" ;;
     fedora)
         echo -e "${GREEN}Removing (distro) docker packages${NC}"
         sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest \
@@ -78,7 +68,7 @@ function dev() {
         mkdir -p "$HOME/go"
         # docker
 	    sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
-	    sudo usermod -aG docker "$NEWUSER"
+	    sudo usermod -aG docker "$USER"
         # postgresql
         sudo postgresql-setup --initdb --unit postgresql
 	    sudo systemctl start postgresql.service ;;
@@ -137,8 +127,8 @@ function bin() {
 
 function pg() {
     echo -e "${GREEN}Configuring postgresql${NC}"
-    sudo -iu postgres createuser -P -s -e "$NEWUSER"
-	createdb "$NEWUSER"
+    sudo -iu postgres createuser -P -s -e "$USER"
+	createdb "$USER"
 }
 
 function main() {
@@ -154,6 +144,7 @@ function main() {
     pyenv) pyenv ;;
     bin) bin ;;
     pg) pg ;;
+    *) echo -e "${RED}=> command ${YELLOW}'${command}'${RED} not found${NC}" ;;
     esac
 }
 
@@ -165,8 +156,6 @@ YELLOW='\033[1;33m'
 YAY='yay -S --noconfirm'
 DNF='sudo dnf install -y'
 DISTRO=$(sed -n 's/^ID=//p' /etc/os-release)
-
-NEWUSER='gigante'
 
 command=$1
 main "$@"
