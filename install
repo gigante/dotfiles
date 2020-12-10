@@ -46,7 +46,7 @@ function dev() {
     arch)
         echo -e "${GREEN}Installing packages${NC}"
         "$YAY" php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug jdk jdk-openjdk icedtea-web nodejs npm yarn elixir go \
-            dotnet-sdk postgresql virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant docker docker-compose
+            dotnet-sdk postgresql virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant docker docker-compose shellcheck
         echo -e "${GREEN}Configuring${NC}"
         sudo -iu postgres initdb -D /var/lib/postgres/data
         sudo systemctl start postgresql.service
@@ -58,7 +58,7 @@ function dev() {
             docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine
         sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
         echo -e "${GREEN}Installing packages${NC}"
-        "$DNF" golang docker-ce docker-ce-cli containerd.io \
+        "$DNF" docker-ce docker-ce-cli containerd.io ShellCheck golang \
             php php-cli php-common php-gd php-json php-mbstring php-mcrypt php-opcache php-pdo php-pear php-pgsql \
             php-mysqlnd php-mysqli php-process php-xml php-pecl-zip php-imap php-intl php-pecl-apcu php-soap \
             java-1.8.0-openjdk java-1.8.0-openjdk-devel icedtea-web java-11-openjdk java-11-openjdk-devel java-latest-openjdk java-latest-openjdk-devel \
