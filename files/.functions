@@ -1,47 +1,18 @@
 #!/bin/bash
 
-md() {
-  mkdir -p "$1" && cd "$1" || exit
-}
+md() { mkdir -p "$1" && cd "$1" || exit; }
+x() { sh "$HOME/.screenlayout/$1.sh"; }
+iso() { sudo dd bs=4M if="$2" of="/dev/$1" status=progress oflag=sync; }
+fh() { find . -iname $1; }
 
-x() {
-  sh "$HOME/.screenlayout/$1.sh"
-}
-
-iso() {
-  sudo dd bs=4M if="$2" of="/dev/$1" status=progress oflag=sync
-}
-
-# Hashes
-sha1text() {
-  (echo -n "$*" | openssl sha1)
-}
-
-md5text() {
-  (echo -n "$*" | openssl md5)
-}
+# hash
+sha1text() { (echo -n "$*" | openssl sha1); }
+md5text() { (echo -n "$*" | openssl md5); }
 
 # systemd
-start() {
-  sudo systemctl start "$1.service"
-}
-
-restart() {
-  sudo systemctl restart "$1.service"
-}
-
-stop() {
-  sudo systemctl stop "$1.service"
-}
-
-enable() {
-  sudo systemctl enable "$1.service"
-}
-
-status() {
-  sudo systemctl status "$1.service"
-}
-
-disable() {
-  sudo systemctl disable "$1.service"
-}
+start() { sudo systemctl start "$1.service"; }
+restart() { sudo systemctl restart "$1.service"; }
+stop() { sudo systemctl stop "$1.service"; }
+enable() { sudo systemctl enable "$1.service"; }
+status() { sudo systemctl status "$1.service"; }
+disable() { sudo systemctl disable "$1.service"; }
