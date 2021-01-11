@@ -6,6 +6,7 @@
 # Global properties
 command=~/bin/blocklets/$BLOCK_NAME
 separator_block_width=10
+separator=false
 markup=none
 
 [mediaplayer]
@@ -14,21 +15,37 @@ instance=spotify
 interval=5
 signal=10
 
+[spacer]
+full_text=
+color=#b16286
+
 [memory]
 label=
 instance=MEM
 markup=pango
 interval=30
 
+[spacer]
+full_text=
+color=#b16286
+
 [cpu_usage]
 label=
 markup=pango
 interval=10
 
+[spacer]
+full_text=
+color=#b16286
+
 [disk]
 label=
 markup=pango
 interval=30
+
+[spacer]
+full_text=
+color=#b16286
 
 [volume]
 label=
@@ -36,9 +53,17 @@ instance=Master
 interval=once
 signal=10
 
+[spacer]
+full_text=
+color=#b16286
+
 [battery]
 markup=pango
 interval=30
+
+[spacer]
+full_text=
+color=#b16286
 
 [time]
 label=

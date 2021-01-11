@@ -58,16 +58,16 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
-set $ws1 "1:"
-set $ws2 "2:"
-set $ws3 "3:"
-set $ws4 "4:"
-set $ws5 "5:"
-set $ws6 "6:"
-set $ws7 "7:"
-set $ws8 "8:"
-set $ws9 "9:"
-set $ws10 "10:0"
+set $ws1 "1:01 "
+set $ws2 "2:02 "
+set $ws3 "3:03 "
+set $ws4 "4:04 "
+set $ws5 "5:05 "
+set $ws6 "6:06 "
+set $ws7 "7:07 "
+set $ws8 "8:09 "
+set $ws9 "9:09 "
+set $ws10 "10:10 "
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -105,6 +105,16 @@ bar {
     position top
     strip_workspace_numbers yes
     separator_symbol "|"
+
+    colors {
+    separator  #272828
+    background #272828
+    #                   border  bg      text
+    focused_workspace   #272828 #689d68 #272828
+    inactive_workspace  #272828 #272828 #c08a21
+    active_workspace    #272828 #272828 #c08a21
+    urgent_workspace    #cc241d #cc241d #272828
+    }
 }
 
 # AUTOSTART
