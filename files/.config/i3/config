@@ -107,13 +107,13 @@ bar {
     separator_symbol "|"
 
     colors {
-    separator  #272828
-    background #272828
-    #                   border  bg      text
-    focused_workspace   #272828 #689d68 #272828
-    inactive_workspace  #272828 #272828 #c08a21
-    active_workspace    #272828 #272828 #c08a21
-    urgent_workspace    #cc241d #cc241d #272828
+        separator  #272828
+        background #272828
+        #                   border  bg      text
+        focused_workspace   #272828 #689d68 #272828
+        inactive_workspace  #272828 #272828 #c08a21
+        active_workspace    #272828 #272828 #c08a21
+        urgent_workspace    #272828 #cc241d #272828
     }
 }
 
