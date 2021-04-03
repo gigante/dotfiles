@@ -4,6 +4,13 @@ md() { mkdir -p "$1" && cd "$1" || exit; }
 x() { sh "$HOME/.screenlayout/$1.sh"; }
 iso() { sudo dd bs=4M if="$2" of="/dev/$1" status=progress oflag=sync; }
 fh() { find . -iname $1; }
+zap() { echo "https://api.whatsapp.com/send/?phone=55${1}&app_absent=1" | xclip -selection clipboard -in; }
+
+pdf-compress() {
+  filename="${1%.*}"
+  pdf2ps $1 ${filename}_temp.ps && ps2pdf ${filename}_temp.ps ${filename}_new.pdf
+  rm -f ${filename}_temp.ps
+}
 
 # hash
 sha1text() { (echo -n "$*" | openssl sha1); }
