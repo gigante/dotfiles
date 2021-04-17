@@ -1,0 +1,59 @@
+#!/bin/bash
+
+function basic() {
+    sudo dnf install -y "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm"
+    sudo dnf install -y "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm"
+    sudo dnf update
+
+    sudo dnf install -y util-linux-user redhat-rpm-config curl wget zsh stow nano jq bat pass expect neofetch ImageMagick \
+        gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel \
+        libyaml-devel libffi-devel gdbm-devel ncurses-devel dnf-plugins-core
+
+    sudo sed -i "/SELINUX=.*/c\SELINUX=permissive" /etc/selinux/config
+    sudo dnf groupinstall -y 'Development Tools'
+}
+
+function dev() {
+    sudo dnf remove -y docker docker-client docker-client-latest docker-common docker-latest \
+        docker-latest-logrotate docker-logrotate docker-selinux docker-engine-selinux docker-engine
+    sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+
+    sudo dnf install -y docker-ce docker-ce-cli containerd.io ShellCheck golang \
+        php php-cli php-common php-gd php-json php-mbstring php-mcrypt php-opcache php-pdo php-pear php-pgsql \
+        php-mysqlnd php-mysqli php-process php-xml php-pecl-zip php-imap php-intl php-pecl-apcu php-soap \
+        java-1.8.0-openjdk java-1.8.0-openjdk-devel icedtea-web java-11-openjdk java-11-openjdk-devel java-latest-openjdk java-latest-openjdk-devel \
+        dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1 elixir nodejs npm postgresql postgresql-server postgresql-contrib
+
+    # docker-compose
+    DOCKER_COMPOSE="$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)"
+    sudo curl -L "https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    mkdir -p "$HOME/go"
+
+    # docker
+    sudo grubby --update-kernel=ALL --args="systemd.unified_cgroup_hierarchy=0"
+    sudo usermod -aG docker "$USER"
+
+    # postgresql
+    sudo postgresql-setup --initdb --unit postgresql
+    sudo systemctl start postgresql.service
+}
+
+function apps() {
+    sudo dnf config-manager --set-enabled google-chrome
+    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+    sudo dnf check-update
+    sudo dnf install -y gnome-tweak-tool terminator vlc audacity rclone transmission filezilla emacs fedora-workstation-repositories google-chrome-stable code
+}
+
+function main() {
+    case "$command" in
+    basic) basic ;;
+    dev) dev ;;
+    apps) apps ;;
+    esac
+}
+
+command=$1
+main "$@"

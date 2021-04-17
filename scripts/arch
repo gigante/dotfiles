@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function basic() {
+    yay -S --noconfirm bat neofetch nmap feh pass expect tree wget zsh stow whois pdftk jq picom scrot i3blocks i3lock-fancy htop upx \
+        imagemagick gist heroku-cli xf86-input-libinput system-config-printer bluez blueman pulseaudio-bluetooth udiskie \
+        gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb playerctl lm_sensors sysstat acpi inotify-tools \
+        ttf-bitstream-vera ttf-dejavu ttf-mac-fonts ttf-monaco ttf-ms-fonts noto-fonts-emoji
+}
+
+function dev() {
+    yay -S --noconfirm php php-gd php-xsl php-intl php-redis php-pgsql php-sqlite xdebug jdk jdk-openjdk icedtea-web nodejs npm yarn elixir go \
+        dotnet-sdk postgresql virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle vagrant docker docker-compose shellcheck
+    sudo -iu postgres initdb -D /var/lib/postgres/data
+    sudo systemctl start postgresql.service
+    sudo usermod -aG docker "$USER"
+}
+
+function apps() {
+    yay -S --noconfirm rofi nautilus evince eog gimp libreoffice vlc spotify audacity dropbox rclone transmission filezilla \
+        firefox google-chrome emacs visual-studio-code-bin
+    sudo systemctl start tlp.service
+    sudo systemctl enable tlp.service
+}
+
+function main() {
+    case "$command" in
+    basic) basic ;;
+    dev) dev ;;
+    apps) apps ;;
+    esac
+}
+
+command=$1
+main "$@"

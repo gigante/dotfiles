@@ -5,13 +5,13 @@ Script and dotfiles to configure Archlinux or Fedora
 **To install:**
 
 ```bash
-$ ./install basic   # install basic packages
-$ ./install dev     # install dev packages
-$ ./install apps    # install general apps
-$ ./install dots    # symlink dotfiles
-$ ./install prezto  # config prezto
-$ ./install rbenv   # clone rbenv repo
-$ ./install pyenv   # clone pyenv repo
-$ ./install bin     # download binaries
-$ ./install pg      # minimal postgresql config
+$ make basic   # install basic packages
+$ make dev     # install dev packages
+$ make apps    # install general apps
+$ make dots    # symlink dotfiles
+$ make prezto  # config prezto
+$ make rbenv   # clone rbenv repo
+$ make pyenv   # clone pyenv repo
+$ make bin     # download binaries
+$ make pg      # minimal postgresql config
 ```
