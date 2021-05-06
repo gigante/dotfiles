@@ -6,7 +6,7 @@ function basic() {
     sudo dnf update
 
     sudo dnf install -y util-linux-user redhat-rpm-config curl wget zsh stow nano jq bat pass expect neofetch ImageMagick \
-        gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel i3blocks \
+        gcc zlib-devel bzip2 bzip2-devel readline-devel sqlite sqlite-devel openssl-devel i3blocks playerctl lm_sensors sysstat acpi inotify-tools \
         libyaml-devel libffi-devel gdbm-devel ncurses-devel dnf-plugins-core
 
     sudo sed -i "/SELINUX=.*/c\SELINUX=permissive" /etc/selinux/config
