@@ -126,7 +126,7 @@ bar {
 
 # AUTOSTART
 exec_always --no-startup-id feh --bg-fill ~/Dropbox/arch.png
-exec --no-startup-id compton --config ~/.config/compton/compton.conf
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet &
 exec --no-startup-id dropbox &
 exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2 &
