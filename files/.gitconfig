@@ -19,6 +19,7 @@
   default = current
 [core]
   excludesfile = ~/.gitignore
+	editor = code -w
 [include]
   path = ~/.gituser
 [color "diff-highlight"]
