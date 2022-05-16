@@ -20,9 +20,9 @@ function pyenv() {
 }
 
 function bin() {
+    git clone https://github.com/gigante/sh "$HOME/bin"
     curl -sS https://getcomposer.org/installer | php -- --install-dir="$HOME/bin" --filename=composer
     wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein -O "$HOME/bin/lein" && chmod +x "$HOME/bin/lein"
-    curl -sL https://git.io/JJvpl | bash -
 }
 
 function pg() {
