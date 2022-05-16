@@ -4,6 +4,9 @@
 export EDITOR="code -w"
 export VISUAL="$EDITOR"
 export PAGER='less'
+export HISTCONTROL=ignoreboth:erasedups
+export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
+export SAVEHIST=1000000
 
 # lang
 export LC_ALL='en_US.UTF-8'
