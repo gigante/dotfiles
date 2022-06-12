@@ -4,11 +4,26 @@
 export EDITOR="code -w"
 export VISUAL="$EDITOR"
 export PAGER='less'
-export HISTCONTROL=ignoreboth:erasedups
-export HISTIGNORE="ls:cd:cd -:pwd:exit:date:* --help"
-export SAVEHIST=1000000
+export MANPAGER="less -X"  # Don’t clear the screen after quitting a manual page
 
-# lang
+# zsh history
+export HISTSIZE=100000  # the number of items for the internal history list
+export SAVEHIST=50000000  # maximum number of items for the history file
+export HISTORY_IGNORE="(ls|cd|cd -|..|pwd|exit|date|* --help|* -h)"
+
+# zsh options
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_FIND_NO_DUPS  # do not display duplicate when searching in history
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY  # append command to history file immediately
+setopt EXTENDED_HISTORY  # record command start time
+setopt SHARE_HISTORY  # share between shells
+setopt LONG_LIST_JOBS  # print job notifications in the long format by default
+setopt NO_BEEP
+
+
+# Prefer US English and use UTF-8
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 
@@ -21,7 +36,6 @@ export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 
-
 # Go
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
@@ -31,7 +45,6 @@ export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.npm/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.config/composer/vendor/bin:$PATH"
-
 
 # openssl@3 mac
 export PATH="/opt/homebrew/opt/openssl@3/bin:$PATH"
