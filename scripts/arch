@@ -1,8 +1,8 @@
 #!/bin/bash
 
 function basic() {
-    yay -S --noconfirm bat neofetch nmap feh pass expect xclip tree wget zsh stow whois pdftk jq picom scrot i3blocks i3lock-fancy htop upx \
-        imagemagick gist heroku-cli xf86-input-libinput system-config-printer accountsservice bluez blueman pulseaudio-bluetooth udiskie \
+    yay -S --noconfirm bat neofetch nmap feh pass expect xclip tree wget zsh stow whois pdftk jq picom scrot i3blocks i3lock-fancy-git htop upx \
+        imagemagick gist xf86-input-libinput system-config-printer accountsservice bluez blueman pulseaudio-bluetooth udiskie \
         gvfs-afc gvfs-goa gvfs-google gvfs-gphoto2 gvfs-mtp gvfs-nfs gvfs-smb playerctl lm_sensors sysstat acpi inotify-tools \
         ttf-bitstream-vera ttf-dejavu ttf-mac-fonts ttf-monaco ttf-ms-fonts noto-fonts-emoji
 }
