@@ -4,7 +4,7 @@
 # name, separator, separator_block_width, short_text, signal, urgent
 
 # Global properties
-command=~/bin/blocklets/$BLOCK_NAME
+command=blocklets/$BLOCK_NAME
 separator_block_width=10
 separator=false
 markup=none
