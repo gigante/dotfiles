@@ -129,10 +129,10 @@ exec_always --no-startup-id feh --bg-fill ~/Dropbox/arch.png
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
 exec --no-startup-id nm-applet &
 exec --no-startup-id dropbox &
-exec --no-startup-id setxkbmap -model abnt2 -layout br -variant abnt2 &
-exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Tapping Enabled" 1 &
-exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 0 &
-exec --no-startup-id xinput set-prop "Elan Touchpad" "libinput Disable While Typing Enabled" 1 &
+exec --no-startup-id setxkbmap -model thinkpad -layout br -variant abnt2 &
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Tapping Enabled" 1 &
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 0 &
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Disable While Typing Enabled" 1 &
 exec --no-startup-id blueman-applet &
 
 # Pulse Audio controls
