@@ -23,3 +23,10 @@ stop() { sudo systemctl stop "$1.service"; }
 enable() { sudo systemctl enable "$1.service"; }
 status() { sudo systemctl status "$1.service"; }
 disable() { sudo systemctl disable "$1.service"; }
+
+export_openssl() {
+  export PATH="/opt/homebrew/opt/openssl@$1/bin:$PATH"
+  export LDFLAGS="-L /opt/homebrew/opt/openssl@$1/lib"
+  export CPPFLAGS="-I /opt/homebrew/opt/openssl@$1/include"
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/openssl@$1/lib/pkgconfig"
+}
