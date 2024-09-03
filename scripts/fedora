@@ -22,7 +22,7 @@ function dev() {
         php php-cli php-common php-gd php-json php-mbstring php-mcrypt php-opcache php-pdo php-pear php-pgsql \
         php-mysqlnd php-mysqli php-process php-xml php-pecl-zip php-imap php-intl php-pecl-apcu php-soap \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel icedtea-web java-11-openjdk java-11-openjdk-devel java-latest-openjdk java-latest-openjdk-devel \
-        dotnet-sdk-3.1 aspnetcore-runtime-3.1 dotnet-runtime-3.1 elixir nodejs npm postgresql postgresql-server postgresql-contrib
+        dotnet-sdk-8.0 aspnetcore-runtime-8.0 dotnet-runtime-8.0 elixir nodejs npm postgresql postgresql-server postgresql-contrib
 
     # docker-compose
     DOCKER_COMPOSE="$(curl --silent https://api.github.com/repos/docker/compose/releases/latest | jq .name -r)"
