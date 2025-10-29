@@ -7,3 +7,8 @@ Thumbs.db
 /.env
 /.env.*
 /coverage
+.config/uv
+.config/gtk-*
+.config/iterm2
+.config/fish
+.config/neofetch
